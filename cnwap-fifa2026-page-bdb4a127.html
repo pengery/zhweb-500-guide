@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>主题说明 · 世界杯知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fdeacb 0%, #f7dbb2 35%, #f2cc9a 70%, #edbe84 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem 1rem;
+        }
+
+        .page-wrapper {
+            max-width: 960px;
+            width: 100%;
+        }
+
+        /* 主要卡片容器 */
+        .main-card {
+            background: #fffdf9;
+            border-radius: 36px;
+            padding: 2.2rem 2rem 2.8rem;
+            box-shadow: 0 12px 30px rgba(160, 100, 40, 0.20), 0 4px 8px rgba(0,0,0,0.03);
+            backdrop-filter: blur(2px);
+            transition: box-shadow 0.2s;
+        }
+
+        /* 顶部标识区 */
+        .hero-tag {
+            display: inline-block;
+            background: #e8d4b0;
+            color: #5e3f1f;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            margin-bottom: 1.6rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #3d2c18;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+            letter-spacing: -0.3px;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #725a3a;
+            border-left: 4px solid #dbbd92;
+            padding-left: 1rem;
+            margin: 0.5rem 0 2rem 0;
+            font-weight: 400;
+        }
+
+        /* 目录式布局 —— 网格卡片 */
+        .grid-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0 2.2rem;
+        }
+
+        .grid-item {
+            background: #f7efe2;
+            border-radius: 28px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            transition: all 0.15s ease;
+            border: 1px solid #efe1cd;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .grid-item:hover {
+            background: #f3e6d3;
+            border-color: #dbbc93;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(160, 100, 40, 0.10);
+        }
+
+        .grid-item .label {
+            display: block;
+            font-weight: 500;
+            color: #4d361c;
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+
+        .grid-item .desc {
+            display: block;
+            font-size: 0.8rem;
+            color: #7d674a;
+        }
+
+        /* 说明区 */
+        .section {
+            margin-top: 2.2rem;
+            border-top: 1px dashed #dcc7ad;
+            padding-top: 1.8rem;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #3f2e18;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: "▍";
+            color: #bb9b74;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .explain-text {
+            color: #3f331f;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .explain-text p {
+            margin-bottom: 1rem;
+        }
+
+        .explain-text a {
+            color: #8f5f2c;
+            background: #f7ebdb;
+            text-decoration: none;
+            padding: 0.1rem 0.4rem;
+            border-radius: 14px;
+            font-weight: 500;
+            transition: background 0.1s;
+            word-break: break-word;
+        }
+
+        .explain-text a:hover {
+            background: #e7d3b9;
+            text-decoration: underline;
+        }
+
+        /* 提示区 / 相关信息卡片 */
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.6rem 0;
+        }
+
+        .info-card {
+            background: #faf3e9;
+            flex: 1 1 200px;
+            border-radius: 28px;
+            padding: 1.2rem 1.4rem;
+            border-left: 6px solid #cfb18b;
+        }
+
+        .info-card .title-sm {
+            font-weight: 600;
+            color: #3b2b16;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .info-card p {
+            font-size: 0.88rem;
+            color: #4f3e28;
+            line-height: 1.5;
+        }
+
+        .tip-badge {
+            display: inline-block;
+            background: #e0cbb2;
+            color: #3b2a12;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            margin-right: 0.4rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* FAQ 摘要区 */
+        .faq-block {
+            background: #f6ede1;
+            border-radius: 28px;
+            padding: 1.6rem 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #3d2a12;
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        .faq-a {
+            color: #5f4b30;
+            font-size: 0.9rem;
+            padding-left: 0.8rem;
+            border-left: 2px solid #d6bb99;
+        }
+
+        .faq-a a {
+            color: #8a5d2c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+        }
+
+        .faq-a a:hover {
+            background: #e3cfb5;
+        }
+
+        .footnote {
+            margin-top: 2.5rem;
+            font-size: 0.75rem;
+            color: #826d4f;
+            text-align: center;
+            border-top: 1px solid #e0cfb9;
+            padding-top: 1.2rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            .main-card {
+                padding: 1.8rem 1.2rem 2rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .grid-links {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+
+            .info-grid {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .grid-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="main-card">
+
+        <!-- 知识库入口标识 -->
+        <div class="hero-tag">📚 主题资料 · 持续整理</div>
+
+        <h1>世界杯 · 背景与关注点</h1>
+        <div class="subhead">从关键词延伸出的信息集合 · 目录式浏览</div>
+
+        <!-- 目录感网格 - 快速入口卡片 -->
+        <div class="grid-links">
+            <div class="grid-item">
+                <span class="label">🏆 赛事沿革</span>
+                <span class="desc">历届举办地与赛制概略</span>
+            </div>
+            <div class="grid-item">
+                <span class="label">🌐 参赛队伍</span>
+                <span class="desc">各大洲晋级格局</span>
+            </div>
+            <div class="grid-item">
+                <span class="label">📅 近期动态</span>
+                <span class="desc">预选赛与筹备信息</span>
+            </div>
+            <div class="grid-item">
+                <span class="label">⚽ 比赛用球</span>
+                <span class="desc">科技与设计演变</span>
+            </div>
+            <div class="grid-item">
+                <span class="label">📺 转播与媒体</span>
+                <span class="desc">官方信号与平台</span>
+            </div>
+            <div class="grid-item">
+                <span class="label">🏟️ 球场与城市</span>
+                <span class="desc">主办场馆速览</span>
+            </div>
+        </div>
+
+        <!-- 说明区 (切入角度：围绕世界杯背后的主题内容展开) -->
+        <div class="section">
+            <div class="section-title">关于「世界杯」的信息说明</div>
+            <div class="explain-text">
+                <p>提到<strong>世界杯</strong>，多数人首先想到的是每四年一届的足球盛事。但若从关键词背后的主题展开，它还涵盖赛事组织、文化符号、商业合作、球迷社区以及东道主的城市变迁等丰富维度。这个页面旨在以知识库入口的形式，提供结构化的索引，方便快速了解不同侧面。</p>
+                <p>例如赛事沿革部分梳理了从初创到扩军的进程；近期动态则聚焦预选赛分组、赛程变化以及场馆建设进度。如果你想直接查找更集中的信息流，可以访问 <a href="https://cnwap-fifa2026.com">世界杯</a> 相关页面，那里通常聚合了官方新闻与数据。</p>
+                <p>另外，关于参赛队伍、经典比赛回顾、纪录统计等，也都可以在上述索引中找到对应模块。本站作为信息整理页，不提供实时比分或直播，但持续收录值得留意的背景资料。</p>
+            </div>
+        </div>
+
+        <!-- 提示区 + 相关信息区 (并列卡片) -->
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="title-sm">📌 阅读提示</div>
+                <p>本页专注于概念介绍与指引，不替代官方渠道。如需确认比赛时间、票务或规则变更，请以</p>
+                <p style="margin-top: 0.4rem;"><span class="tip-badge">世界杯</span> 官方发布为准，并注意甄别信息时效。</p>
+            </div>
+            <div class="info-card">
+                <div class="title-sm">🗂️ 相关信息</div>
+                <p>• 历史夺冠国家分布<br>
+                • 预选赛晋级规则简述<br>
+                • 举办城市文化与交通<br>
+                • 相关纪录片与书籍推荐</p>
+            </div>
+            <div class="info-card">
+                <div class="title-sm">🔍 搜索建议</div>
+                <p>在主流搜索引擎使用“世界杯 2026 预选赛”“世界杯 场馆”等组合关键词，可获取更细分的公开报道。也可直接参考 <a href="https://cnwap-fifa2026.com" style="color:#7f572c; text-decoration:underline;">世界杯</a> 汇集的基础档案。</p>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要区 -->
+        <div class="faq-block">
+            <div class="section-title" style="border-top: none; padding-top:0; margin-top:0;">❓ 常见问题摘要</div>
+
+            <div class="faq-item">
+                <div class="faq-q">世界杯每几年举办一次？下一届在哪举行？</div>
+                <div class="faq-a">通常每四年举办一次。第23届世界杯计划由美国、加拿大、墨西哥联合主办，时间在2026年。相关筹备进度可留意 <a href="https://cnwap-fifa2026.com">世界杯</a> 专题。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">如何获取最新的比赛日程？</div>
+                <div class="faq-a">国际足联官网及各大体育媒体会公布赛程表。部分中文站点也会整理关键时间节点，例如你可以通过 <a href="https://cnwap-fifa2026.com">世界杯</a> 页面查看已发布的阶段安排（非实时直播）。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">“世界杯”这个关键词背后还有哪些冷门知识？</div>
+                <div class="faq-a">例如世界杯奖杯的材质与保管规则、每届赛事用球的设计故事、以及举办城市因赛事产生的基建变化。在知识库的「赛事沿革」「球场与城市」板块有简要收录。</div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footnote">
+            世界杯知识库入口 · 目录式整理 &nbsp;|&nbsp; 内容持续迭代 &nbsp;|&nbsp; 信息仅供参考
+        </div>
+
+    </div>  <!-- main-card end -->
+</div>  <!-- page-wrapper end -->
+</body>
+</html>
