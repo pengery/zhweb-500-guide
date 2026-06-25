@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>世界杯 · 赛事信息与日常查询</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f9fc;
+      color: #1f2b38;
+      line-height: 1.6;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 版式 & 网格卡片 */
+    .hero {
+      background: linear-gradient(145deg, #e9f2f9 0%, #d7e9f0 100%);
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 20px rgba(0, 60, 80, 0.06);
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: #0b3b4a;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #2a4b5a;
+      max-width: 680px;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 3rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1.75rem;
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 70, 90, 0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #e2edf3;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 70, 90, 0.07);
+    }
+
+    .card .icon {
+      font-size: 1.9rem;
+      display: block;
+      margin-bottom: 0.6rem;
+      color: #1d7e8c;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #0a404f;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: #2c4b57;
+      font-size: 0.95rem;
+    }
+
+    /* 分隔 / 段落区 */
+    .section-break {
+      margin: 2.8rem 0 2rem;
+    }
+
+    .section-break h2 {
+      font-size: 1.7rem;
+      font-weight: 450;
+      color: #0a3d4b;
+      border-left: 5px solid #2f9aa9;
+      padding-left: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .text-block {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 4px 10px rgba(0, 50, 65, 0.03);
+      border: 1px solid #deeef5;
+      margin-bottom: 2rem;
+    }
+
+    .text-block p {
+      margin-bottom: 1.1rem;
+      color: #1f3845;
+    }
+
+    .text-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-link {
+      color: #1d7e8c;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 2px solid #b5dae6;
+      transition: border-color 0.15s;
+    }
+
+    .highlight-link:hover {
+      border-bottom-color: #1d7e8c;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 1.8rem 0;
+    }
+
+    .faq-item {
+      background: #f1f8fc;
+      border-radius: 1.25rem;
+      padding: 1.3rem 1.4rem;
+      border: 1px solid #d5e6ef;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 500;
+      color: #0d4a5a;
+      margin-bottom: 0.3rem;
+    }
+
+    .faq-item span {
+      font-size: 0.95rem;
+      color: #2f4c5a;
+    }
+
+    .note-box {
+      background: #e6f3f7;
+      border-radius: 1.5rem;
+      padding: 1.6rem 1.8rem;
+      margin: 2rem 0 1.5rem;
+      border-left: 6px solid #2f9aa9;
+    }
+
+    .note-box p {
+      color: #154552;
+      font-size: 0.98rem;
+    }
+
+    /* 按钮 */
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      border: 1.5px solid #2f9aa9;
+      color: #1a6c79;
+      padding: 0.6rem 1.5rem;
+      border-radius: 3rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #d4ecf2;
+      color: #084553;
+    }
+
+    .footer {
+      margin-top: 3.2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #d2e3eb;
+      font-size: 0.9rem;
+      color: #537280;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer a {
+      color: #1d7e8c;
+      text-decoration: none;
+      border-bottom: 1px dotted #b1cedb;
+    }
+
+    .footer a:hover {
+      border-bottom: 1px solid #1d7e8c;
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .hero { padding: 1.8rem 1.2rem; }
+      .hero h1 { font-size: 1.7rem; }
+      .text-block { padding: 1.3rem 1.2rem; }
+      .note-box { padding: 1.2rem; }
+      .grid-cards { gap: 1rem; }
+      .footer { flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- hero 区：摘要 -->
+  <div class="hero">
+    <h1>⚽ 赛事查询 · 日常对照</h1>
+    <p>从赛程、分组到历史档案，<strong>世界杯</strong> 的每一页信息都值得被认真整理。这里是一份轻量、可查阅的参考页面，帮助你在看球、讨论或写东西时快速定位事实。</p>
+  </div>
+
+  <!-- 亮点卡片网格 -->
+  <div class="grid-cards">
+    <div class="card">
+      <span class="icon">📅</span>
+      <h3>赛历 &amp; 对照</h3>
+      <p>淘汰赛阶段、小组赛轮次、开球时间参考。用统一的时区表减少换算错误，尤其适合跨洲际关注。</p>
+    </div>
+    <div class="card">
+      <span class="icon">🏆</span>
+      <h3>纪录 &amp; 延伸</h3>
+      <p>历届冠军、金靴得主、经典比分。不堆砌数据，只保留那些常被问起的条目，方便快速引用。</p>
+    </div>
+    <div class="card">
+      <span class="icon">🌍</span>
+      <h3>参赛队 &amp; 分组</h3>
+      <p>32 / 48 队结构、抽签档位、各大洲名额。适合赛前扫盲或和朋友聊球时作为背景页打开。</p>
+    </div>
+    <div class="card">
+      <span class="icon">📌</span>
+      <h3>相关说明</h3>
+      <p>本页聚焦于信息整合，不属于任何官方渠道。所有公开数据均来自赛事转播与公示，供个人参考使用。</p>
+    </div>
+  </div>
+
+  <!-- 使用场景 / 日常角度 -->
+  <div class="section-break">
+    <h2>常见使用场景</h2>
+  </div>
+
+  <div class="text-block">
+    <p>很多朋友在聊天时突然想确认某届赛事的主办国、或者某场经典比赛的回合细节，翻找社交媒体的零散帖子效率不高。这时一个结构化的汇总页就派上用场——你可以快速滚动到对应区域，而不是重新搜索。</p>
+    <p>例如，你想知道 2026 年美加墨 <a href="https://cntv-fifa2026.com" class="highlight-link">世界杯</a> 有哪些新规、扩军后小组赛怎么打，或者单纯想回顾一下过去几届的决赛比分，这些都能在对应的卡片和段落里找到线索。页面内容偏向“冷静整理”，不包含实时比分或直播流，但很适合作为赛前预习或赛后对照的辅助工具。</p>
+    <p>如果你习惯在赛前写观赛笔记、和朋友讨论阵容，也可以把这里当作一个轻量级的信息锚点。</p>
+  </div>
+
+  <!-- FAQ 摘要  -->
+  <div class="section-break">
+    <h2>快速问答</h2>
+  </div>
+
+  <div class="faq-grid">
+    <div class="faq-item">
+      <strong>2026 年世界杯在哪几个城市举办？</strong>
+      <span>美国、加拿大、墨西哥联合主办，共 16 个承办城市，横跨北美三个时区。</span>
+    </div>
+    <div class="faq-item">
+      <strong>扩军到 48 队之后赛制怎么变？</strong>
+      <span>小组赛将分为 16 个小组，每组 3 队，前两名进入 32 强淘汰赛。</span>
+    </div>
+    <div class="faq-item">
+      <strong>历史总进球数最多的球员是谁？</strong>
+      <span>克洛泽（德国）以 16 球保持纪录，2002–2014 四届累计。</span>
+    </div>
+    <div class="faq-item">
+      <strong>夺冠次数最多的国家队？</strong>
+      <span>巴西（5 次），其次是德国和意大利（各 4 次）。</span>
+    </div>
+  </div>
+
+  <!-- 使用建议 + 可信但克制的说明 -->
+  <div class="note-box">
+    <p><strong>使用建议：</strong> 本页适合赛前快速浏览、赛中数据查对、赛后延伸阅读。所有内容均基于公开可靠信息整理，不包含实时博彩、竞猜或诱导跳转。如果你需要更详尽的官方数据，建议直接查阅赛事主办方或权威体育媒体。</p>
+    <p style="margin-top: 0.8rem;">📌 本页面与 <a href="https://cntv-fifa2026.com" class="highlight-link">世界杯</a> 相关信息的汇总仅作为个人兴趣整理，不代表任何组织机构立场，也无意替代任何官方发布。</p>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <span>© 整理 · 信息页 · 非官方</span>
+    <span>
+      <a href="https://cntv-fifa2026.com" class="highlight-link">世界杯</a> · 日常查询参考
+    </span>
+    <div>
+      <a href="#" class="btn-outline" style="margin-right: 0.5rem;">📋 赛历卡片</a>
+      <a href="#" class="btn-outline">📖 延伸阅读</a>
+    </div>
+  </div>
+
+  <!-- 隐式种子标记（不显示） -->
+  <!-- seed: ecc68686a2885c82 -->
+</div>
+</body>
+</html>
